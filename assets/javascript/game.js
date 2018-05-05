@@ -4,6 +4,7 @@ var letterText = document.getElementById("letterGuessed");
 var currentText = document.getElementById("currentWord");
 var remainingtText = document.getElementById("guessesRemaining");
 var winstText = document.getElementById("wins");
+var imageText=document.getElementById("image");
 
 //declare global variables
 var letters = [];
@@ -16,7 +17,8 @@ var alphapit = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 var hangmanWords = {
 
     guessedAllowed: 9,
-    wordArray: ["aarrbee", "horse", "dog", "zebra"],
+    wordArray: ["oyster","caiman", "hamster", "jaguar", "koala","leopard","oyster","puma","zebra","snail"],
+    imageArray:["./assets/images/oyster.jpg","./assets/images/caiman.jpg","./assets/images/hamster.jpg","./assets/images/jaguar.jpg","./assets/images/koala.jpg","./assets/images/leopard.jpg","./assets/images/oyster.jpg","./assets/images/puma.jpg","./assets/images/zebra.jpg","./assets/images/snail.jpg",],
     wordIndex: Math.floor(Math.random() * 4),
     tryToGuess: ["-"],
     wins: 0,
@@ -79,6 +81,15 @@ var hangmanWords = {
             // give the isWin boolean a value of true as the user guessed the leeter 
             isWin = true;
             // call reset function to get new word 
+            var img=document.createElement("img");
+           // put the right image from imageArray
+           imageText.textContent="";
+           img.src=this.imageArray[this.wordIndex];
+            img.id="picture";
+            img.height="150";
+            img.width="150";
+            imageText.appendChild(img);
+          // call reset function
             this.resetMe(isWin);
         }
 
@@ -95,6 +106,7 @@ var hangmanWords = {
         // reset variables and change newWord boolean to true 
         newWord = true;
         letterText.textContent = "";
+      //  imageText.textContent="";
         this.guessedAllowed = 9;
         this.tryToGuess = [];
         this.invalidLetters = [];
@@ -134,7 +146,7 @@ document.onkeyup = function (event) {
         var a = arr.indexOf(userLetter);
         if ((a) > -1) {
             for (var x = 0; x < arr.length; x++) {
-                // look in the letter array to check if the letter pressed in matching any of them 
+                // look in the letter array to check if the letter pressed is matching any of them 
                 if (arr[x] === userLetter) {
                    // if the letter pressed match any of the letter then fill the tryToGuess array with that letter at specific index
                     hangmanWords.fillWord(newWord, x, userLetter);
