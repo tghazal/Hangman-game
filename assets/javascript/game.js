@@ -1,170 +1,162 @@
 
-
+// get html elements
 var letterText = document.getElementById("letterGuessed");
 var currentText = document.getElementById("currentWord");
 var remainingtText = document.getElementById("guessesRemaining");
 var winstText = document.getElementById("wins");
 
-
+//declare global variables
 var letters = [];
 var i = 0;
 var newWord = true;
-var isWin=false;
-
+var isWin = false;
 var alphapit = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
+//declare hangman object
 var hangmanWords = {
+
     guessedAllowed: 9,
-   // var randomNumber = Math.floor(Math.random() * hangmanWords.wordArray.length);
-    
-    wordArray: ["aarrbee","horse", "dog", "zebra"],
-    wordIndex: Math.floor(Math.random() *4 ),
+    wordArray: ["aarrbee", "horse", "dog", "zebra"],
+    wordIndex: Math.floor(Math.random() * 4),
     tryToGuess: ["-"],
     wins: 0,
     invalidLetters: [],
 
-   
+    //declare function to return one word from word array  each time
     myWord: function () {
-        var randomNumber = Math.floor(Math.random() * hangmanWords.wordArray.length);
-        console.log(randomNumber);
+
         return (this.wordArray[this.wordIndex]);
     },
 
+    //return array of letters in the word 
     letterOfWord: function () {
         var letters = [];
         letters = this.myWord();
         return (letters);
-        // console.log(letters.length);
+
 
     },
 
+    // function to fill the array of guesed letters
     fillWord: function (isnew, x, y) {
-
+        // if this is new word then fill it with -  
         if (isnew === true) {
             for (var s = 0; s < this.letterOfWord().length; s++) {
                 this.tryToGuess[s] = "-";
-                console.log("new word");
+                //convert the array to string 
                 var displayString = this.tryToGuess.join(' ');
                 currentText.textContent = (displayString);
             }
         }
         else {
-
+            // if this is not new word then fill the correct letter in the approciate index 
             this.tryToGuess[x] = y;
+            //convert array to string 
             var displayString = this.tryToGuess.join(' ');
             currentText.textContent = (displayString);
-            console.log(this.tryToGuess);
+
 
         }
     },
 
+    // function o fill invalid leters in the invalid letters array
     fillInvalidLetters: function (letter) {
         var o = this.invalidLetters.indexOf(letter);
+        //  if the letter is not already inside the array then push it to the array  
         if (o === -1) {
-
             this.invalidLetters.push(letter);
-            console.log(hangmanWords.invalidLetters);
             this.guessedAllowed--;
         }
 
     },
+    //function to check if the word is totally guessed 
     checkWord: function () {
         var array = this.tryToGuess;
+        // check if the tryToGuess array still have "-"
         var v = array.indexOf("-");
-        console.log("same word");
+        // if the tryToGuess array dont have any "-" then will move to the new word
         if (v === -1) {
-            console.log("new word");
-           isWin=true;
+            // give the isWin boolean a value of true as the user guessed the leeter 
+            isWin = true;
+            // call reset function to get new word 
             this.resetMe(isWin);
-
-            // console.log("done");
         }
 
 
     },
 
     resetMe: function (win) {
-        console.log("reset");
-        // if (this.wordIndex === this.wordArray.length - 1) { this.wordIndex = 0; }
-        // else {
-        //     this.wordIndex++;
-        // }
-        this.wordIndex= Math.floor(Math.random() * hangmanWords.wordArray.length);
-
+        // give the word index a  random number for the new word from wordArray 
+        this.wordIndex = Math.floor(Math.random() * hangmanWords.wordArray.length);
+        //if the user guessed the letter then add 1 to win variable
         if (win) {
             this.wins++;
         }
-
+        // reset variables and change newWord boolean to true 
         newWord = true;
-
         letterText.textContent = "";
         this.guessedAllowed = 9;
-        console.log(this.wordIndex);
-
         this.tryToGuess = [];
         this.invalidLetters = [];
         remainingtText.textContent = this.guessedAllowed;
         winstText.textContent = this.wins;
+        // call function fillWord to fill the array of tryToGuess by "-" as its new word
         this.fillWord(newWord, 0, 0);
+        //set newWord boolean to false after filling the array by "-"
         newWord = false;
 
 
     },
 
 
-
 };
 
-console.log(hangmanWords.letterOfWord());
+
 winstText.textContent = hangmanWords.wins;
 remainingtText.textContent = hangmanWords.guessedAllowed;
+// fill the array of tryToGuess by "-" as its new word
 hangmanWords.fillWord(newWord, 0, 0);
+ //set newWord boolean to false after filling the array by "-"
 newWord = false;
+// call this function when any key preesed 
 document.onkeyup = function (event) {
-    var randomNumber = Math.floor(Math.random() * hangmanWords.wordArray.length);
-    console.log(randomNumber);
-    //hangmanWords.fillWord();
+     // get the letter that pressed 
     var userLetter = event.key;
+    //convert the letter to upper case
     var userLetterCapital = userLetter.toUpperCase();
+    //check if the key pressed is letter included in the alphapit array 
     var wordKind = alphapit.indexOf(userLetterCapital);
+    // if the key pressed is letter then ..
     if (wordKind > -1) {
+        // get the letters array of the word that the user should guess 
         var arr = hangmanWords.letterOfWord();
-        console.log("arr=="+arr);
+       //check if the letter pressed is one of the letter of the word
         var a = arr.indexOf(userLetter);
         if ((a) > -1) {
-            for(var x=0; x<arr.length ;x++)
-            { console.log(arr[x]);
-                if( arr[x] ===  userLetter)
-                {
-                 hangmanWords.fillWord(newWord, x, userLetter);
+            for (var x = 0; x < arr.length; x++) {
+                // look in the letter array to check if the letter pressed in matching any of them 
+                if (arr[x] === userLetter) {
+                   // if the letter pressed match any of the letter then fill the tryToGuess array with that letter at specific index
+                    hangmanWords.fillWord(newWord, x, userLetter);
                 }
             }
-           // hangmanWords.fillWord(newWord, a, userLetter);
-            console.log(userLetter);
         }
         else {
-            console.log(hangmanWords.invalidLetters);
+            // if the letter presed dosn't match any of the letter of the word then fill it in the invalidLetter array 
             hangmanWords.fillInvalidLetters(userLetterCapital);
-
-            // hangmanWords.invalidLetters.push(userLetterCapital);
-            // console.log(hangmanWords.invalidLetters);
-
-            // hangmanWords.guessedAllowed--;
             remainingtText.textContent = hangmanWords.guessedAllowed;
             letterText.textContent = hangmanWords.invalidLetters;
-            // var newdiv = document.createElement("div");
-            // newdiv.setAttribute("style", "display:inline");
-            // newdiv.textContent = userLetterCapital + ",";
-            // letterText.appendChild(newdiv);
-
+            // if the guessed allowed is zero then reset game for a new word and give the isWin boolean a false value
             if (hangmanWords.guessedAllowed == 0) {
-                isWin=false;
+                isWin = false;
                 hangmanWords.resetMe(isWin);
             }
 
         }
+        // check if the user guess the whole word
         hangmanWords.checkWord();
     }
+    // if the key pressed is not one of the alphabit then alert 
     else {
         alert("please enter alphabet only");
     }
