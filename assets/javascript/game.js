@@ -17,8 +17,8 @@ var alphapit = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 var hangmanWords = {
 
     guessedAllowed: 9,
-    wordArray: ["oyster","caiman", "hamster", "jaguar", "koala","leopard","oyster","puma","zebra","snail"],
-    imageArray:["./assets/images/oyster.jpg","./assets/images/caiman.jpg","./assets/images/hamster.jpg","./assets/images/jaguar.jpg","./assets/images/koala.jpg","./assets/images/leopard.jpg","./assets/images/oyster.jpg","./assets/images/puma.jpg","./assets/images/zebra.jpg","./assets/images/snail.jpg",],
+    wordArray: ["kangaroo","caiman", "hamster", "jaguar", "koala","leopard","oyster","puma","zebra","snail","jackal"],
+    imageArray:["./assets/images/kangaroo.jpg","./assets/images/caiman.jpg","./assets/images/hamster.jpg","./assets/images/jaguar.jpg","./assets/images/koala.jpg","./assets/images/leopard.jpg","./assets/images/oyster.jpg","./assets/images/puma.jpg","./assets/images/zebra.jpg","./assets/images/snail.jpg","./assets/images/jackal.jpg"],
     wordIndex: Math.floor(Math.random() * 4),
     tryToGuess: ["-"],
     wins: 0,

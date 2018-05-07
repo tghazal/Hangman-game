@@ -14,38 +14,25 @@
 <!-- <body style="background-image  : url('./assets/images/animal-background.jpg' )"> -->
 
 
-<body class="bg-success text-success">
-    <div class="container ">
+<body class="bg-black text-black">
+    <header>
+        <h1 class="py-5 text-center font-weight-bold">Animal Hangman</h1>  
+    </header> 
+    
+    <div class="container pt-1  mt-5 ">
 
-        <div class="row w-50  mx-auto my-5">
 
-            <div class="col-md-12 ">
-                <h1 class="text-center"> Hangman Game</h1>
-            </div>
-
-        </div>
-
-        <div class="row w-50  mx-auto my-3">
+        <!-- <div class="row w-75  mx-auto mt-5 ">
 
             <div class="col-md-12 ">
                 <h3 class="text-center"> Press any key to get started</h3>
             </div>
 
-        </div>
+        </div> -->
 
-        <div class="row w-75  mx-auto my-3">
+       
 
-            <div class="col-md-12 ">
-                <h3 class="text-center"> Wins</h3>
-            </div>
-
-            <div class="col-md-12 ">
-                <h3 id="wins" class="text-center"> </h3>
-            </div>
-
-        </div>
-
-        <div class="row w-75  mx-auto my-3">
+        <div class="row w-75  mx-auto mt-4 ">
 
             <div class="col-md-12 ">
                 <h3 class="text-center"> Current word</h3>
@@ -54,13 +41,13 @@
             <div class="col-md-12 ">
                 <h3 id="currentWord" class="text-center"> </h3>
             </div>
-
         </div>
 
-        <div class="row w-75  mx-auto my-3">
+
+        <div class="row w-75  mx-auto ">
 
             <div class="col-md-12 ">
-                <h3 class="text-center"> Number of Guesses remaining </h3>
+                <h3 class="text-center"> Guesses remaining </h3>
             </div>
 
             <div class="col-md-12 ">
@@ -69,7 +56,7 @@
 
         </div>
 
-        <div class="row w-75  mx-auto my-3">
+        <div class="row w-75  mx-auto ">
 
             <div class="col-md-12 ">
                 <h3 class="text-center"> Letters already guessed </h3>
@@ -80,14 +67,31 @@
             </div>
 
         </div>
+        <div class="row w-75  mx-auto ">
 
-        <div class="row w-75  mx-auto my-3">
-
-            <div class="col-md-12 ">
-                <h3 id="image" class="text-center"></h3>
+                <div class="col-md-6 ">
+                    <div class="col-md-12 ">
+                        <h3 class="text-center">Image</h3>
+                    </div>
+    
+                    <div class="col-md-12 ">
+                        <h3 id="image" class="text-center"></h3>
+                    </div>
+                </div>
+    
+           
+              <div class="col-md-6 ">
+    
+    
+                <div class="col-md-12 ">
+                    <h3 class="text-center"> Wins</h3>
+                </div>
+    
+                <div class="col-md-12 ">
+                    <h3 id="wins" class="text-center"> </h3>
+                </div>
             </div>
-
-        </div>
+       
 
 
 

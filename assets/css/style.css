@@ -1,8 +1,16 @@
 body { 
-    background-image: url('../images/animal-background.jpg' );
+    background-image: url('../images/animal4-background.jpg' );
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
     background-position: center; 
-    
+    height: 100%;
+}
+
+
+.container{
+
+
+
+
 }
